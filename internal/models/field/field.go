@@ -2,18 +2,18 @@ package field
 
 import "errors"
 
-type FieldType string
+type Type string
 
 const (
-	INT    FieldType = "INT"
-	STRING FieldType = "STRING"
+	INT    Type = "INT"
+	STRING Type = "STRING"
 )
 
 type Field interface {
 	validate() error
 }
 
-func Validate(f FieldType, value interface{}) error {
+func Validate(f Type, value interface{}) error {
 	switch f {
 	case "INT":
 		if value != nil {

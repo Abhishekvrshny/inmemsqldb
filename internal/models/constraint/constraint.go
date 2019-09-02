@@ -2,17 +2,17 @@ package constraint
 
 import "errors"
 
-type ConstraintType string
+type Type string
 
 const (
-	NOTNULL ConstraintType = "NOTNULL"
+	NOTNULL Type = "NOTNULL"
 )
 
 type Constraint interface {
 	Validate(interface{}) error
 }
 
-func Validate(cType ConstraintType, value interface{}) error {
+func Validate(cType Type, value interface{}) error {
 	switch cType {
 	case "NOTNULL":
 		return new(NotNULL).Validate(value)

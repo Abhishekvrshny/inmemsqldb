@@ -7,11 +7,11 @@ import (
 
 type Column struct {
 	name        string
-	typ         field.FieldType
-	constraints []constraint.ConstraintType
+	typ         field.Type
+	constraints []constraint.Type
 }
 
-func New(name string, f field.FieldType, constraints []constraint.ConstraintType) *Column {
+func New(name string, f field.Type, constraints []constraint.Type) *Column {
 	return &Column{name, f, constraints}
 }
 
@@ -19,7 +19,7 @@ func (c *Column) GetName() string {
 	return c.name
 }
 
-func (c *Column) GetType() field.FieldType {
+func (c *Column) GetType() field.Type {
 	return c.typ
 }
 

@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// get a db instance services
+	// get an instance of db service
 	dbs := services.NewDBService()
 
 	// create a database
@@ -31,7 +31,7 @@ func main() {
 	}
 
 	// create a new column with constraints
-	col := column.New("some.string.column", field.STRING, []constraint.ConstraintType{constraint.NOTNULL})
+	col := column.New("some.string.column", field.STRING, []constraint.Type{constraint.NOTNULL})
 
 	// create a new table with the column
 	err = dbs.CreateTable("some.table", []*column.Column{col})
