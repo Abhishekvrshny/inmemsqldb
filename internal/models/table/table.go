@@ -73,6 +73,7 @@ func (t *Table) scanGet(column string, value interface{}) ([]*record.Record, err
 }
 
 func (t *Table) Insert(cols []string, values []interface{}) error {
+	cols, values = t.getRecordTuple(cols, values)
 	for i := 0; i < len(cols); i++ {
 		col, err := t.checkAndGetColumn(cols[i])
 		if err != nil {
@@ -103,4 +104,25 @@ func (t *Table) checkAndGetColumn(col string) (*column.Column, error) {
 		}
 	}
 	return nil, errors.New("column not found")
+}
+
+func (t *Table) getRecordTuple(cols []string, values []interface{}) ([]string, []interface{}) {
+	var c []string
+	var v []interface{}
+	for _, cc := range t.cols {
+		flag := 0
+		for i := 0; i < len(cols); i++ {
+			if cc.GetName() == cols[i] {
+				c = append(c, cols[i])
+				v = append(v, values[i])
+				flag = 1
+				break
+			}
+		}
+		if flag == 0 {
+			c = append(c, cc.GetName())
+			v = append(v, nil)
+		}
+	}
+	return c, v
 }
